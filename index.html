@@ -1,0 +1,2063 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rukshan | Cyber Security & Digital Marketing Portfolio</title>
+    <!-- Google Fonts: Outfit (Sans-serif) & JetBrains Mono (Monospace) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Lenis Smooth Scroll -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+    <!-- FontAwesome for Social Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        cyber: {
+                            black: '#050508',
+                            dark: '#0a0a10',
+                            card: '#0f0f1c',
+                            cyan: '#00f3ff',
+                            purple: '#b026ff',
+                            green: '#39ff14',
+                            gray: '#141424',
+                        }
+                    },
+                    boxShadow: {
+                        'neon-cyan': '0 0 15px rgba(0, 243, 255, 0.25)',
+                        'neon-purple': '0 0 15px rgba(176, 38, 255, 0.25)',
+                        'neon-green': '0 0 15px rgba(57, 255, 20, 0.25)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #050508;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #141424;
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00f3ff;
+        }
+
+        /* Subtle Binary Canvas background */
+        #binary-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.30;
+            pointer-events: none;
+        }
+
+        /* Scanner line for portrait transition */
+        .scan-line {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #00f3ff, transparent);
+            box-shadow: 0 0 8px #00f3ff;
+            animation: scanMove 4s ease-in-out infinite;
+        }
+
+        @keyframes scanMove {
+            0% {
+                top: 0%;
+            }
+
+            50% {
+                top: 100%;
+            }
+
+            100% {
+                top: 0%;
+            }
+        }
+
+        /* Active Navigation indicator style for top header navbar */
+        .active-nav-item {
+            color: #00f3ff !important;
+            border-bottom: 2px solid #00f3ff;
+        }
+
+        /* Active Navigation indicator style for mobile drawer navbar */
+        .active-nav-item-mobile {
+            color: #00f3ff !important;
+            border-left: 3px solid #00f3ff;
+            padding-left: 8px;
+        }
+
+        /* Hero name typing cursor blink */
+        #hero-name-type {
+            border-right: 3px solid #00f3ff;
+            animation: name-cursor-blink 0.75s step-end infinite;
+        }
+
+        @keyframes name-cursor-blink {
+
+            0%,
+            100% {
+                border-color: transparent;
+            }
+
+            50% {
+                border-color: #00f3ff;
+            }
+        }
+
+        /* Custom styling for CSS mask logo loaders */
+        .logo-mask {
+            mask-size: contain;
+            -webkit-mask-size: contain;
+            mask-repeat: no-repeat;
+            -webkit-mask-repeat: no-repeat;
+            mask-position: center;
+            -webkit-mask-position: center;
+        }
+
+        /* --- GLITCH ROLE ANIMATION --- */
+        .glitch-role {
+            position: relative;
+            display: inline-block;
+            animation: glitch-flicker 5s infinite;
+        }
+
+        .glitch-role::before,
+        .glitch-role::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .glitch-role::before {
+            color: #b026ff;
+            animation: glitch-top 5s infinite;
+            clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+        }
+
+        .glitch-role::after {
+            color: #39ff14;
+            animation: glitch-bot 5s infinite;
+            clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+        }
+
+        @keyframes glitch-flicker {
+
+            0%,
+            90%,
+            100% {
+                opacity: 1;
+                transform: none;
+            }
+
+            91% {
+                opacity: 0.85;
+                transform: skewX(-1deg);
+            }
+
+            93% {
+                opacity: 1;
+                transform: none;
+            }
+
+            95% {
+                transform: skewX(1deg) translateX(2px);
+            }
+
+            97% {
+                transform: none;
+            }
+        }
+
+        @keyframes glitch-top {
+
+            0%,
+            88%,
+            100% {
+                transform: none;
+                opacity: 0;
+            }
+
+            89% {
+                transform: translateX(-3px);
+                opacity: 0.7;
+            }
+
+            91% {
+                transform: translateX(3px);
+                opacity: 0.5;
+            }
+
+            93% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes glitch-bot {
+
+            0%,
+            90%,
+            100% {
+                transform: none;
+                opacity: 0;
+            }
+
+            91% {
+                transform: translateX(3px);
+                opacity: 0.6;
+            }
+
+            93% {
+                transform: translateX(-2px);
+                opacity: 0.4;
+            }
+
+            95% {
+                opacity: 0;
+            }
+        }
+
+        /* --- SKILL CARD REDESIGN --- */
+        .skill-hex-card {
+            position: relative;
+            background: linear-gradient(135deg, rgba(15, 15, 28, 0.95) 0%, rgba(10, 10, 20, 0.9) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            padding: 18px 16px;
+            overflow: hidden;
+            transition: all 0.35s ease;
+            opacity: 0;
+            transform: translateY(24px);
+        }
+
+        .skill-hex-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 12px;
+            padding: 1px;
+            background: linear-gradient(135deg, var(--card-accent, #00f3ff), transparent 60%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.35s;
+        }
+
+        .skill-hex-card:hover::before {
+            opacity: 1;
+        }
+
+        .skill-hex-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .skill-hex-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Arc progress ring */
+        .skill-ring-wrap {
+            position: relative;
+            width: 64px;
+            height: 64px;
+            flex-shrink: 0;
+        }
+
+        .skill-ring-wrap svg {
+            transform: rotate(-90deg);
+        }
+
+        .skill-ring-bg {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.06);
+            stroke-width: 4;
+        }
+
+        .skill-ring-fill {
+            fill: none;
+            stroke-width: 4;
+            stroke-linecap: round;
+            stroke-dasharray: 163;
+            stroke-dashoffset: 163;
+            transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .skill-ring-label {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Stat card pulse on reveal */
+        .stat-card {
+            transition: all 0.4s ease;
+        }
+
+        .stat-card.counting {
+            animation: stat-pop 0.3s ease;
+        }
+
+        @keyframes stat-pop {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Typing cursor blink */
+        .typing-cursor {
+            display: inline-block;
+            font-weight: 300;
+            color: #00f3ff;
+            animation: blink-cursor 0.75s step-end infinite;
+        }
+
+        @keyframes blink-cursor {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* About section slide-in — visibility controlled by GSAP, not CSS opacity */
+        .about-reveal {
+            will-change: transform, opacity;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-cyber-black text-slate-300 font-sans overflow-x-hidden selection:bg-cyber-cyan selection:text-cyber-black">
+
+    <!-- Faint Binary Canvas Background -->
+    <canvas id="binary-canvas"></canvas>
+
+    <!-- FLOATING TOP NAVIGATION BAR (Supiri Header Design - Centered & Floating) -->
+    <header id="main-header"
+        class="fixed top-4 left-0 right-0 mx-auto w-[92%] max-w-5xl h-16 bg-cyber-dark/80 backdrop-blur-xl border border-white/10 rounded-2xl z-50 px-6 md:px-10 flex items-center justify-between shadow-[0_10px_30px_rgba(0,0,0,0.8)] opacity-0">
+        <!-- Logo / Brand Link -->
+        <a href="#init" class="flex items-center gap-2 group">
+            <div class="w-2.5 h-2.5 bg-cyber-cyan rounded-full animate-pulse shadow-[0_0_8px_#00f3ff]"></div>
+            <span class="text-base font-bold text-white tracking-widest font-mono">RuSH_X_<span
+                    class="text-cyber-cyan font-light">©️</span></span>
+        </a>
+
+        <!-- Desktop Navigation Items -->
+        <nav class="hidden md:flex items-center gap-6 font-mono text-xs h-full">
+            <a href="#init" class="nav-link py-2.5 text-slate-400 hover:text-cyber-cyan transition-colors"
+                data-target="init">INIT</a>
+            <a href="#about" class="nav-link py-2.5 text-slate-400 hover:text-cyber-cyan transition-colors"
+                data-target="about">ABOUT</a>
+            <a href="#skills" class="nav-link py-2.5 text-slate-400 hover:text-cyber-cyan transition-colors"
+                data-target="skills">SKILLS+</a>
+            <a href="#tools-env" class="nav-link py-2.5 text-slate-400 hover:text-cyber-cyan transition-colors"
+                data-target="tools-env">TOOLS</a>
+            <a href="#services" class="nav-link py-2.5 text-slate-400 hover:text-cyber-cyan transition-colors"
+                data-target="services">SERVICES</a>
+            <a href="#projects" class="nav-link py-2.5 text-slate-400 hover:text-cyber-cyan transition-colors"
+                data-target="projects">PROJECT_OP</a>
+            <a href="#contact" class="nav-link py-2.5 text-slate-400 hover:text-cyber-cyan transition-colors"
+                data-target="contact">CONTACT</a>
+        </nav>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobile-toggle"
+            onclick="document.getElementById('mobile-menu').classList.remove('translate-x-full', 'invisible', 'pointer-events-none'); document.getElementById('main-header').classList.add('invisible', 'pointer-events-none')"
+            class="md:hidden text-slate-300 hover:text-cyber-cyan transition-colors focus:outline-none p-2.5 -mr-2"
+            aria-label="Open Menu">
+            <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+    </header>
+
+    <!-- Mobile Drawer Sidebar (revealed on toggle with solid dark background) -->
+    <div id="mobile-menu" style="background-color: #050508;"
+        class="fixed inset-0 bg-[#050508] z-[100] translate-x-full invisible pointer-events-none transition-transform duration-300 ease-in-out flex flex-col justify-center items-center gap-6 font-mono text-lg overflow-y-auto py-12">
+        <!-- Close Button inside menu -->
+        <button id="mobile-close"
+            onclick="document.getElementById('mobile-menu').classList.add('translate-x-full', 'invisible', 'pointer-events-none'); document.getElementById('main-header').classList.remove('invisible', 'pointer-events-none')"
+            class="absolute top-5 right-6 text-slate-300 hover:text-cyber-cyan p-2.5" aria-label="Close Menu">
+            <i class="fa-solid fa-xmark text-2xl"></i>
+        </button>
+        <a href="#init"
+            onclick="document.getElementById('mobile-menu').classList.add('translate-x-full', 'invisible', 'pointer-events-none'); document.getElementById('main-header').classList.remove('invisible', 'pointer-events-none')"
+            class="mobile-nav-link text-slate-400 hover:text-cyber-cyan py-1 w-full text-center"
+            data-target="init">INIT</a>
+        <a href="#about"
+            onclick="document.getElementById('mobile-menu').classList.add('translate-x-full', 'invisible', 'pointer-events-none'); document.getElementById('main-header').classList.remove('invisible', 'pointer-events-none')"
+            class="mobile-nav-link text-slate-400 hover:text-cyber-cyan py-1 w-full text-center"
+            data-target="about">ABOUT</a>
+        <a href="#skills"
+            onclick="document.getElementById('mobile-menu').classList.add('translate-x-full', 'invisible', 'pointer-events-none'); document.getElementById('main-header').classList.remove('invisible', 'pointer-events-none')"
+            class="mobile-nav-link text-slate-400 hover:text-cyber-cyan py-1 w-full text-center"
+            data-target="skills">SKILLS+</a>
+        <a href="#tools-env"
+            onclick="document.getElementById('mobile-menu').classList.add('translate-x-full', 'invisible', 'pointer-events-none'); document.getElementById('main-header').classList.remove('invisible', 'pointer-events-none')"
+            class="mobile-nav-link text-slate-400 hover:text-cyber-cyan py-1 w-full text-center"
+            data-target="tools-env">TOOLS</a>
+        <a href="#services"
+            onclick="document.getElementById('mobile-menu').classList.add('translate-x-full', 'invisible', 'pointer-events-none'); document.getElementById('main-header').classList.remove('invisible', 'pointer-events-none')"
+            class="mobile-nav-link text-slate-400 hover:text-cyber-cyan py-1 w-full text-center"
+            data-target="services">SERVICES</a>
+        <a href="#projects"
+            onclick="document.getElementById('mobile-menu').classList.add('translate-x-full', 'invisible', 'pointer-events-none'); document.getElementById('main-header').classList.remove('invisible', 'pointer-events-none')"
+            class="mobile-nav-link text-slate-400 hover:text-cyber-cyan py-1 w-full text-center"
+            data-target="projects">PROJECT_OP</a>
+        <a href="#contact"
+            onclick="document.getElementById('mobile-menu').classList.add('translate-x-full', 'invisible', 'pointer-events-none'); document.getElementById('main-header').classList.remove('invisible', 'pointer-events-none')"
+            class="mobile-nav-link text-slate-400 hover:text-cyber-cyan py-1 w-full text-center"
+            data-target="contact">CONTACT</a>
+    </div>
+
+    <!-- MAIN PAGE CONTAINER -->
+    <main class="w-full max-w-6xl mx-auto px-4 sm:px-8 md:px-12 py-20 space-y-28 md:space-y-36">
+
+        <!-- SECTION B: HERO OVERVIEW HEADER (INIT) -->
+        <section id="init" class="min-h-[85vh] flex flex-col justify-center pt-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+
+                <!-- Text Details & Profile Summary (Mobile alignment optimized) -->
+                <div
+                    class="lg:col-span-7 space-y-6 order-2 lg:order-1 text-center lg:text-left flex flex-col items-center lg:items-start">
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 bg-cyber-cyan/5 border border-cyber-cyan/20 text-cyber-cyan rounded-full text-xs tracking-wider font-mono font-bold">
+                        <span class="w-1.5 h-1.5 bg-cyber-cyan rounded-full shadow-[0_0_5px_#00f3ff]"></span>
+                        SYSTEM ACTIVE: RUKSHAN.CFG
+                    </div>
+
+                    <div class="space-y-3 w-full">
+                        <h1
+                            class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-tight min-h-[50px] sm:min-h-[60px] md:min-h-[72px] flex items-center justify-center lg:justify-start">
+                            Hi, I am&nbsp;<span id="hero-name-type"
+                                class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-cyan to-cyber-purple pb-1">RUKSHAN</span>
+                        </h1>
+                        <!-- Subtitle -->
+                        <div
+                            class="text-lg sm:text-xl font-mono text-cyber-cyan font-bold min-h-[36px] flex items-center justify-center lg:justify-start border-l-0 lg:border-l-2 border-cyber-cyan/35 lg:pl-3">
+                            <span>Cybersecurity Student &amp; Ethical Hacker</span>
+                        </div>
+                    </div>
+
+                    <p id="hero-decrypt-text"
+                        class="decrypt-text text-sm sm:text-base text-slate-400 leading-relaxed max-w-xl">
+                        Passionate <strong class="text-cyber-cyan font-semibold">Cybersecurity Student</strong>
+                        specialising in ethical hacking, network penetration testing, and digital threat analysis. On a
+                        mission to defend systems and expose vulnerabilities before the bad actors do.
+                    </p>
+
+                    <!-- SOCIAL MEDIA HIGHLIGHTED LINKS -->
+                    <div class="space-y-3 pt-2 w-full flex flex-col items-center lg:items-start">
+                        <span
+                            class="text-[10px] text-slate-500 font-mono tracking-widest uppercase block text-center lg:text-left">COMMUNICATION_CHANNELS</span>
+                        <div class="flex flex-wrap justify-center lg:justify-start gap-3">
+                            <a href="https://youtube.com" target="_blank"
+                                class="w-10 h-10 rounded-lg bg-cyber-card border border-white/5 flex items-center justify-center text-slate-400 hover:text-red-500 hover:border-red-500/40 hover:shadow-[0_0_15px_rgba(239,68,68,0.25)] hover:-translate-y-0.5 transition-all duration-300"
+                                title="YouTube">
+                                <i class="fa-brands fa-youtube text-lg"></i>
+                            </a>
+                            <a href="https://web.facebook.com/rushiscd" target="_blank"
+                                class="w-10 h-10 rounded-lg bg-cyber-card border border-white/5 flex items-center justify-center text-slate-400 hover:text-blue-500 hover:border-blue-500/40 hover:shadow-[0_0_15px_rgba(59,130,246,0.25)] hover:-translate-y-0.5 transition-all duration-300"
+                                title="Facebook">
+                                <i class="fa-brands fa-facebook-f text-lg"></i>
+                            </a>
+                            <a href="https://github.com" target="_blank"
+                                class="w-10 h-10 rounded-lg bg-cyber-card border border-white/5 flex items-center justify-center text-slate-400 hover:text-cyber-cyan hover:border-cyber-cyan/40 hover:shadow-[0_0_15px_rgba(0,243,255,0.25)] hover:-translate-y-0.5 transition-all duration-300"
+                                title="GitHub">
+                                <i class="fa-brands fa-github text-lg"></i>
+                            </a>
+                            <a href="https://www.tiktok.com/@rukzysl01?is_from_webapp=1&sender_device=pc"
+                                target="_blank"
+                                class="w-10 h-10 rounded-lg bg-cyber-card border border-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:border-white/20 hover:shadow-[0_0_15px_rgba(255,255,255,0.15)] hover:-translate-y-0.5 transition-all duration-300"
+                                title="TikTok">
+                                <i class="fa-brands fa-tiktok text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Call to action buttons -->
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-4 w-full">
+                        <a href="#projects"
+                            class="px-6 py-3 bg-cyber-cyan text-cyber-black font-semibold text-xs tracking-wider uppercase rounded-lg hover:shadow-neon-cyan hover:bg-cyber-cyan/95 transition-all duration-300 magnetic-target flex items-center gap-2">
+                            <span>execute_work.sh</span>
+                            <i class="fa-solid fa-arrow-down text-xs"></i>
+                        </a>
+                        <a href="#contact"
+                            class="px-6 py-3 border border-slate-700 hover:border-cyber-cyan text-slate-300 hover:text-white font-semibold text-xs tracking-wider uppercase rounded-lg hover:shadow-neon-cyan/20 transition-all duration-300 magnetic-target">
+                            establish_ssh.cfg
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Professional Portrait Image Widget (INIT Section) -->
+                <div class="lg:col-span-5 flex justify-center order-1 lg:order-2">
+                    <div
+                        class="relative w-56 h-72 sm:w-64 sm:h-80 border border-white/10 hover:border-cyber-cyan/50 bg-cyber-dark rounded-xl p-2.5 shadow-xl transition-all duration-500 overflow-hidden">
+                        <div class="scan-line"></div>
+
+                        <!-- Design corner accents -->
+                        <div class="absolute top-2 left-2 w-3 h-3 border-t-2 border-l-2 border-cyber-cyan/30"></div>
+                        <div class="absolute top-2 right-2 w-3 h-3 border-t-2 border-r-2 border-cyber-cyan/30"></div>
+                        <div class="absolute bottom-2 left-2 w-3 h-3 border-b-2 border-l-2 border-cyber-cyan/30"></div>
+                        <div class="absolute bottom-2 right-2 w-3 h-3 border-b-2 border-r-2 border-cyber-cyan/30"></div>
+
+                        <!-- Image display area -->
+                        <div
+                            class="relative w-full h-full rounded-lg overflow-hidden bg-black/50 border border-white/5">
+                            <img id="clear-avatar" src="portrait.jpg" alt="Professional Profile"
+                                class="absolute inset-0 w-full h-full object-cover filter brightness-105">
+
+                            <!-- Scan grid overlay -->
+                            <div
+                                class="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_60%,rgba(0,0,0,0.3)_40%)] bg-[size:100%_6px] pointer-events-none opacity-30">
+                            </div>
+
+                            <div
+                                class="absolute bottom-0 inset-x-0 p-3 bg-gradient-to-t from-black/90 via-black/75 to-transparent flex flex-col gap-1 text-[10px] font-mono">
+                                <div class="flex justify-between items-center text-cyber-cyan font-bold">
+                                    <span>SYSTEM_ID: RUKSHAN</span>
+                                    <span class="text-xs">🔐</span>
+                                </div>
+                                <div class="flex justify-between items-center text-slate-400">
+                                    <span>IDENTITY: <span class="text-cyber-green font-bold">VERIFIED</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 1: ABOUT ME & STATS -->
+        <section id="about" class="space-y-8 scroll-mt-20">
+            <div class="text-center lg:text-left lg:border-l-4 border-cyber-purple lg:pl-4">
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-wide font-mono uppercase">
+                    ABOUT_RUKSHAN</h2>
+                <p class="text-xs text-slate-500 mt-1 uppercase">Cybersecurity student on a mission to secure the
+                    digital world</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+                <!-- Info bio block -->
+                <div
+                    class="lg:col-span-7 bg-cyber-dark/60 border border-cyber-purple/20 rounded-xl p-5 sm:p-6 flex flex-col justify-between space-y-4 text-center lg:text-left items-center lg:items-start about-reveal">
+                    <div class="space-y-4 text-sm sm:text-base text-slate-400 leading-relaxed">
+                        <p class="decrypt-text">
+                            I'm <strong class="text-white font-semibold">Rukshan</strong> — a dedicated <strong
+                                class="text-cyber-cyan font-semibold">Cybersecurity student</strong> with hands-on
+                            experience in ethical hacking, network penetration testing, and digital forensics.
+                        </p>
+                        <p class="decrypt-text">
+                            Skilled in offensive security tools like <strong class="text-white font-semibold">Kali
+                                Linux, Metasploit, Burp Suite & Nmap</strong>, I actively practice on platforms like
+                            TryHackMe and HackTheBox to sharpen real-world attack and defence strategies.
+                        </p>
+                        <p class="decrypt-text">
+                            My goal: to become a certified <strong class="text-cyber-purple font-semibold">penetration
+                                tester</strong> and help organisations identify vulnerabilities before threat actors do.
+                        </p>
+                    </div>
+
+                    <!-- Contact info chips -->
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-3 pt-2">
+                        <a href="tel:0742641907"
+                            class="flex items-center gap-2 bg-black/40 border border-cyber-cyan/20 text-cyber-cyan text-xs px-3 py-1.5 rounded-full font-mono hover:border-cyber-cyan/60 transition-all">
+                            <i class="fa-solid fa-phone text-[10px]"></i><span>0742641907</span>
+                        </a>
+                        <a href="mailto:rukshan@gmail.com"
+                            class="flex items-center gap-2 bg-black/40 border border-cyber-purple/20 text-cyber-purple text-xs px-3 py-1.5 rounded-full font-mono hover:border-cyber-purple/60 transition-all">
+                            <i class="fa-solid fa-envelope text-[10px]"></i><span>rukshan@gmail.com</span>
+                        </a>
+                        <span
+                            class="flex items-center gap-2 bg-black/40 border border-cyber-green/20 text-cyber-green text-xs px-3 py-1.5 rounded-full font-mono">
+                            <i class="fa-solid fa-shield-halved text-[10px]"></i><span>Ethical Hacking</span>
+                        </span>
+                        <span
+                            class="flex items-center gap-2 bg-black/40 border border-cyber-cyan/20 text-cyber-cyan text-xs px-3 py-1.5 rounded-full font-mono">
+                            <i class="fa-solid fa-user-shield text-[10px]"></i><span>Cybersecurity Student</span>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Stats widgets block -->
+                <div class="lg:col-span-5 grid grid-cols-2 gap-3 sm:gap-4">
+                    <div
+                        class="stat-card bg-cyber-dark/60 border border-white/5 hover:border-cyber-cyan/30 rounded-xl p-4 sm:p-5 flex flex-col justify-center items-center text-center transition-all duration-300 hover:-translate-y-1">
+                        <span
+                            class="stat-num text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-mono">3+</span>
+                        <span
+                            class="text-[9px] sm:text-[10px] text-cyber-cyan font-mono font-bold tracking-widest uppercase mt-2">YEARS
+                            STUDYING</span>
+                    </div>
+                    <div
+                        class="stat-card bg-cyber-dark/60 border border-white/5 hover:border-cyber-purple/30 rounded-xl p-4 sm:p-5 flex flex-col justify-center items-center text-center transition-all duration-300 hover:-translate-y-1">
+                        <span
+                            class="stat-num text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-mono">20+</span>
+                        <span
+                            class="text-[9px] sm:text-[10px] text-cyber-purple font-mono font-bold tracking-widest uppercase mt-2">LAB
+                            CHALLENGES</span>
+                    </div>
+                    <div
+                        class="stat-card bg-cyber-dark/60 border border-white/5 hover:border-cyber-green/30 rounded-xl p-4 sm:p-5 flex flex-col justify-center items-center text-center transition-all duration-300 hover:-translate-y-1">
+                        <span
+                            class="stat-num text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-mono">10+</span>
+                        <span
+                            class="text-[9px] sm:text-[10px] text-cyber-green font-mono font-bold tracking-widest uppercase mt-2">TOOLS
+                            MASTERED</span>
+                    </div>
+                    <div
+                        class="stat-card bg-cyber-dark/60 border border-white/5 hover:border-white/20 rounded-xl p-4 sm:p-5 flex flex-col justify-center items-center text-center transition-all duration-300 hover:-translate-y-1">
+                        <span
+                            class="stat-num text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-mono">100%</span>
+                        <span
+                            class="text-[9px] sm:text-[10px] text-slate-500 font-mono font-bold tracking-widest uppercase mt-2">PASSION
+                            LEVEL</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION C: DYNAMIC SKILLS & TOOLS MATRIX (SKILLS+) -->
+        <section id="skills" class="space-y-8 scroll-mt-20">
+            <div class="text-center lg:text-left lg:border-l-4 border-cyber-cyan lg:pl-4">
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-wide font-mono uppercase">
+                    SKILLS_&_CAPABILITIES</h2>
+                <p class="text-xs text-slate-500 mt-1 uppercase">Cybersecurity tools & technical proficiencies — scroll
+                    to load</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Skills cards with ring progress -->
+                <div class="lg:col-span-8 space-y-6">
+                    <div class="space-y-3">
+                        <h3
+                            class="text-xs font-bold text-cyber-cyan font-mono tracking-widest uppercase text-center lg:text-left">
+                            / TECHNICAL_SECURITY</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="security-skills-grid"></div>
+                    </div>
+                    <div class="space-y-3 pt-2">
+                        <h3
+                            class="text-xs font-bold text-cyber-purple font-mono tracking-widest uppercase text-center lg:text-left">
+                            / ADDITIONAL_SKILLS</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="marketing-skills-grid"></div>
+                    </div>
+                </div>
+
+                <!-- Side credentials -->
+                <div class="lg:col-span-4 space-y-6">
+                    <div class="bg-cyber-dark/80 border border-white/5 rounded-xl p-5 space-y-5">
+                        <div
+                            class="flex items-center justify-center lg:justify-start gap-2 border-b border-white/5 pb-3">
+                            <i class="fa-solid fa-shield-halved text-cyber-cyan"></i>
+                            <h3 class="text-sm font-bold text-white tracking-wider font-mono">PLATFORM_CREDS</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div
+                                class="flex items-center gap-4 bg-black/40 border border-white/5 p-3 rounded-lg hover:border-cyber-cyan/30 transition-all duration-300">
+                                <div
+                                    class="w-10 h-10 bg-cyber-cyan/5 border border-cyber-cyan/25 flex items-center justify-center rounded-lg text-cyber-cyan text-xs font-black">
+                                    THM</div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-white font-mono">TryHackMe</h4>
+                                    <p class="text-[10px] text-cyber-cyan font-mono font-bold">TOP 1% • LEVEL 12</p>
+                                </div>
+                            </div>
+                            <div
+                                class="flex items-center gap-4 bg-black/40 border border-white/5 p-3 rounded-lg hover:border-cyber-purple/30 transition-all duration-300">
+                                <div
+                                    class="w-10 h-10 bg-cyber-purple/5 border border-cyber-purple/25 flex items-center justify-center rounded-lg text-cyber-purple text-xs font-black">
+                                    HTB</div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-white font-mono">Hack The Box</h4>
+                                    <p class="text-[10px] text-cyber-purple font-mono font-bold">PRO HACKER</p>
+                                </div>
+                            </div>
+                            <div
+                                class="flex items-center gap-4 bg-black/40 border border-white/5 p-3 rounded-lg hover:border-cyber-green/30 transition-all duration-300">
+                                <div
+                                    class="w-10 h-10 bg-cyber-green/5 border border-cyber-green/25 flex items-center justify-center rounded-lg text-cyber-green text-xs font-black">
+                                    SEC</div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-white font-mono">CompTIA Security+</h4>
+                                    <p class="text-[10px] text-cyber-green font-mono font-bold">IN PROGRESS</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION F: SECURITY TOOLS & OPERATING SYSTEMS - SPIDER WEB NETWORK -->
+        <section id="tools-env" class="space-y-8 scroll-mt-20">
+            <div class="text-center lg:text-left lg:border-l-4 border-cyber-cyan lg:pl-4">
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-wide font-mono uppercase">
+                    TOOLS_&_ENVIRONMENTS</h2>
+                <p class="text-xs text-slate-500 mt-1 uppercase">Hands-on experience with industry standard security
+                    frameworks and operating systems</p>
+            </div>
+
+            <!-- Spider Web Network Canvas Visualization (desktop + mobile with touch) -->
+            <div class="relative w-full rounded-2xl overflow-hidden border border-white/5 bg-black/30"
+                id="tools-canvas-wrap" style="height: clamp(340px, 50vw, 500px);">
+                <canvas id="tools-web-canvas" class="absolute inset-0 w-full h-full cursor-crosshair"></canvas>
+                <!-- Tooltip hover label -->
+                <div id="tool-tooltip"
+                    class="absolute pointer-events-none hidden z-10 px-3 py-2 rounded-lg bg-cyber-dark border border-cyber-cyan/30 shadow-[0_0_15px_rgba(0,243,255,0.2)] text-center"
+                    style="transform: translate(-50%, -120%)">
+                    <div id="tooltip-name" class="text-xs font-bold text-cyber-cyan font-mono"></div>
+                    <div id="tooltip-desc" class="text-[10px] text-slate-400 mt-0.5 max-w-[140px]"></div>
+                </div>
+            </div>
+
+            <!-- Unused old grid placeholder closed -->
+            <div class="hidden">
+
+                <!-- Nmap -->
+                <div
+                    class="bg-cyber-dark/60 border border-white/5 hover:border-cyber-cyan/35 rounded-xl p-5 flex flex-col items-center text-center justify-between gap-4 group transition-all duration-300 hover:-translate-y-1 hover:shadow-neon-cyan/20">
+                    <div
+                        class="w-12 h-12 rounded-lg bg-black/40 border border-white/5 flex items-center justify-center p-2.5 transition-all">
+                        <div class="w-7 h-7 bg-cyber-cyan logo-mask"
+                            style="mask-image: url('https://cdn.jsdelivr.net/npm/simple-icons@11.12.0/icons/nmap.svg'); -webkit-mask-image: url('https://cdn.jsdelivr.net/npm/simple-icons@11.12.0/icons/nmap.svg');">
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <h4 class="text-xs font-bold text-white font-mono uppercase tracking-wider">Nmap</h4>
+                        <p class="text-[10px] text-slate-400 leading-snug">Network Recon & Active Port Scanning</p>
+                    </div>
+                </div>
+
+                <!-- Wireshark -->
+                <div
+                    class="bg-cyber-dark/60 border border-white/5 hover:border-[#1679A7]/35 rounded-xl p-5 flex flex-col items-center text-center justify-between gap-4 group transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(22,121,167,0.2)]">
+                    <div
+                        class="w-12 h-12 rounded-lg bg-black/40 border border-white/5 flex items-center justify-center p-2.5 transition-all">
+                        <div class="w-7 h-7 bg-[#1679A7] logo-mask"
+                            style="mask-image: url('https://cdn.jsdelivr.net/npm/simple-icons@11.12.0/icons/wireshark.svg'); -webkit-mask-image: url('https://cdn.jsdelivr.net/npm/simple-icons@11.12.0/icons/wireshark.svg');">
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <h4 class="text-xs font-bold text-white font-mono uppercase tracking-wider">Wireshark</h4>
+                        <p class="text-[10px] text-slate-400 leading-snug">Packet Inspection & Traffic Capture</p>
+                    </div>
+                </div>
+
+                <!-- Burp Suite -->
+                <div
+                    class="bg-cyber-dark/60 border border-white/5 hover:border-[#FF6633]/35 rounded-xl p-5 flex flex-col items-center text-center justify-between gap-4 group transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(255,102,51,0.2)]">
+                    <div
+                        class="w-12 h-12 rounded-lg bg-black/40 border border-white/5 flex items-center justify-center p-2.5 transition-all">
+                        <div class="w-7 h-7 bg-[#FF6633] logo-mask"
+                            style="mask-image: url('https://cdn.jsdelivr.net/npm/simple-icons@11.12.0/icons/burpsuite.svg'); -webkit-mask-image: url('https://cdn.jsdelivr.net/npm/simple-icons@11.12.0/icons/burpsuite.svg');">
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <h4 class="text-xs font-bold text-white font-mono uppercase tracking-wider">Burp Suite</h4>
+                        <p class="text-[10px] text-slate-400 leading-snug">Web App Security Interception</p>
+                    </div>
+                </div>
+
+                <!-- Metasploit Framework -->
+                <div
+                    class="bg-cyber-dark/60 border border-white/5 hover:border-[#3F51B5]/35 rounded-xl p-5 flex flex-col items-center text-center justify-between gap-4 group transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(63,81,181,0.2)]">
+                    <div
+                        class="w-12 h-12 rounded-lg bg-black/40 border border-white/5 flex items-center justify-center p-2.5 transition-all">
+                        <div class="w-7 h-7 bg-[#3F51B5] logo-mask"
+                            style="mask-image: url('https://cdn.jsdelivr.net/npm/simple-icons@11.12.0/icons/metasploit.svg'); -webkit-mask-image: url('https://cdn.jsdelivr.net/npm/simple-icons@11.12.0/icons/metasploit.svg');">
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <h4 class="text-xs font-bold text-white font-mono uppercase tracking-wider">Metasploit</h4>
+                        <p class="text-[10px] text-slate-400 leading-snug">Exploitation Framework & Labbing</p>
+                    </div>
+                </div>
+
+                <!-- John the Ripper / Hashcat -->
+                <div
+                    class="bg-cyber-dark/60 border border-white/5 hover:border-white/20 rounded-xl p-5 flex flex-col items-center text-center justify-between gap-4 group transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+                    <div
+                        class="w-12 h-12 rounded-lg bg-black/40 border border-white/5 flex items-center justify-center p-2.5 transition-all">
+                        <div class="w-7 h-7 bg-slate-200 logo-mask"
+                            style="mask-image: url('https://cdn.jsdelivr.net/npm/simple-icons@11.12.0/icons/hashcat.svg'); -webkit-mask-image: url('https://cdn.jsdelivr.net/npm/simple-icons@11.12.0/icons/hashcat.svg');">
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <h4 class="text-xs font-bold text-white font-mono uppercase tracking-wider">Hashcat</h4>
+                        <p class="text-[10px] text-slate-400 leading-snug">Hash Decryption & Rule Audits</p>
+                    </div>
+                </div>
+
+                <!-- Wazuh / Splunk -->
+                <div
+                    class="bg-cyber-dark/60 border border-white/5 hover:border-[#F79F1F]/35 rounded-xl p-5 flex flex-col items-center text-center justify-between gap-4 group transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(247,159,31,0.2)]">
+                    <div
+                        class="w-12 h-12 rounded-lg bg-black/40 border border-white/5 flex items-center justify-center p-2.5 transition-all">
+                        <div class="w-7 h-7 bg-[#F79F1F] logo-mask"
+                            style="mask-image: url('https://cdn.jsdelivr.net/npm/simple-icons@11.12.0/icons/splunk.svg'); -webkit-mask-image: url('https://cdn.jsdelivr.net/npm/simple-icons@11.12.0/icons/splunk.svg');">
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <h4 class="text-xs font-bold text-white font-mono uppercase tracking-wider">Splunk / Wazuh</h4>
+                        <p class="text-[10px] text-slate-400 leading-snug">SIEM Log Telemetry & EDR Alerts</p>
+                    </div>
+                </div>
+
+                <!-- Nessus -->
+                <div
+                    class="bg-cyber-dark/60 border border-white/5 hover:border-[#00C221]/35 rounded-xl p-5 flex flex-col items-center text-center justify-between gap-4 group transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(0,194,33,0.2)]">
+                    <div
+                        class="w-12 h-12 rounded-lg bg-black/40 border border-white/5 flex items-center justify-center p-2.5 transition-all">
+                        <div class="w-7 h-7 bg-[#00C221] logo-mask"
+                            style="mask-image: url('https://cdn.jsdelivr.net/npm/simple-icons@11.12.0/icons/nessus.svg'); -webkit-mask-image: url('https://cdn.jsdelivr.net/npm/simple-icons@11.12.0/icons/nessus.svg');">
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <h4 class="text-xs font-bold text-white font-mono uppercase tracking-wider">Nessus</h4>
+                        <p class="text-[10px] text-slate-400 leading-snug">Vulnerability Scanning & Reports</p>
+                    </div>
+                </div>
+
+                <!-- Kali Linux / Parrot OS -->
+                <div
+                    class="bg-cyber-dark/60 border border-white/5 hover:border-[#8F9CA4]/35 rounded-xl p-5 flex flex-col items-center text-center justify-between gap-4 group transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(143,156,164,0.2)]">
+                    <div
+                        class="w-12 h-12 rounded-lg bg-black/40 border border-white/5 flex items-center justify-center p-2.5 transition-all">
+                        <div class="w-7 h-7 bg-[#8F9CA4] logo-mask"
+                            style="mask-image: url('https://cdn.jsdelivr.net/npm/simple-icons@11.12.0/icons/kalilinux.svg'); -webkit-mask-image: url('https://cdn.jsdelivr.net/npm/simple-icons@11.12.0/icons/kalilinux.svg');">
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <h4 class="text-xs font-bold text-white font-mono uppercase tracking-wider">Kali Linux</h4>
+                        <p class="text-[10px] text-slate-400 leading-snug">Offensive Operating Systems</p>
+                    </div>
+                </div>
+
+                <!-- Shodan -->
+                <div
+                    class="bg-cyber-dark/60 border border-white/5 hover:border-[#E12026]/35 rounded-xl p-5 flex flex-col items-center text-center justify-between gap-4 group transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(225,32,38,0.2)]">
+                    <div
+                        class="w-12 h-12 rounded-lg bg-black/40 border border-white/5 flex items-center justify-center p-2.5 transition-all">
+                        <div class="w-7 h-7 bg-[#E12026] logo-mask"
+                            style="mask-image: url('https://cdn.jsdelivr.net/npm/simple-icons@11.12.0/icons/shodan.svg'); -webkit-mask-image: url('https://cdn.jsdelivr.net/npm/simple-icons@11.12.0/icons/shodan.svg');">
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <h4 class="text-xs font-bold text-white font-mono uppercase tracking-wider">Shodan</h4>
+                        <p class="text-[10px] text-slate-400 leading-snug">IoT Scanner Recon & Intelligence</p>
+                    </div>
+                </div>
+
+                <!-- Python / Bash Scripting -->
+                <div
+                    class="bg-cyber-dark/60 border border-white/5 hover:border-[#3776AB]/35 rounded-xl p-5 flex flex-col items-center text-center justify-between gap-4 group transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(55,118,171,0.2)]">
+                    <div
+                        class="w-12 h-12 rounded-lg bg-black/40 border border-white/5 flex items-center justify-center p-2.5 transition-all">
+                        <div class="w-7 h-7 bg-[#3776AB] logo-mask"
+                            style="mask-image: url('https://cdn.jsdelivr.net/npm/simple-icons@11.12.0/icons/python.svg'); -webkit-mask-image: url('https://cdn.jsdelivr.net/npm/simple-icons@11.12.0/icons/python.svg');">
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <h4 class="text-xs font-bold text-white font-mono uppercase tracking-wider">Python / Bash</h4>
+                        <p class="text-[10px] text-slate-400 leading-snug">Automation Scripts & Pipeline Crons</p>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: WORKFLOW & SERVICES -->
+        <section id="services" class="space-y-8 scroll-mt-20">
+            <div class="text-center lg:text-left lg:border-l-4 border-cyber-green lg:pl-4">
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-wide font-mono uppercase">
+                    MY_SERVICES_&_WORKFLOW</h2>
+                <p class="text-xs text-slate-500 mt-1 uppercase">A systematic implementation process from threat
+                    auditing to traffic funnel scaling</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Step 1 -->
+                <div
+                    class="bg-cyber-dark/50 border border-white/5 hover:border-cyber-cyan/30 rounded-xl p-5 space-y-4 group transition-all duration-300 text-center lg:text-left flex flex-col items-center lg:items-start">
+                    <div
+                        class="w-10 h-10 bg-cyber-cyan/5 border border-cyber-cyan/25 flex items-center justify-center rounded-lg text-cyber-cyan font-mono font-bold text-sm">
+                        01
+                    </div>
+                    <div class="space-y-2">
+                        <h4 class="text-sm font-bold text-white font-mono">Network Auditing</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">
+                            Discovering network assets, checking domain controllers, running static and dynamic
+                            vulnerability logs on infrastructure points.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div
+                    class="bg-cyber-dark/50 border border-white/5 hover:border-cyber-purple/30 rounded-xl p-5 space-y-4 group transition-all duration-300 text-center lg:text-left flex flex-col items-center lg:items-start">
+                    <div
+                        class="w-10 h-10 bg-cyber-purple/5 border border-cyber-purple/25 flex items-center justify-center rounded-lg text-cyber-purple font-mono font-bold text-sm">
+                        02
+                    </div>
+                    <div class="space-y-2">
+                        <h4 class="text-sm font-bold text-white font-mono">Growth Retargeting</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">
+                            Deploying pixel tracking listeners and optimizing automated funnel logic across platforms to
+                            convert random visitors into verified leads.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div
+                    class="bg-cyber-dark/50 border border-white/5 hover:border-cyber-green/30 rounded-xl p-5 space-y-4 group transition-all duration-300 text-center lg:text-left flex flex-col items-center lg:items-start">
+                    <div
+                        class="w-10 h-10 bg-cyber-green/5 border border-cyber-green/25 flex items-center justify-center rounded-lg text-cyber-green font-mono font-bold text-sm">
+                        03
+                    </div>
+                    <div class="space-y-2">
+                        <h4 class="text-sm font-bold text-white font-mono">Ad Optimization</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">
+                            Formulating and testing copywriting variants, pacing budgets, and evaluating click-through
+                            data patterns to avoid wastage.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div
+                    class="bg-cyber-dark/50 border border-white/5 hover:border-white/30 rounded-xl p-5 space-y-4 group transition-all duration-300 text-center lg:text-left flex flex-col items-center lg:items-start">
+                    <div
+                        class="w-10 h-10 bg-white/5 border border-white/10 flex items-center justify-center rounded-lg text-slate-400 font-mono font-bold text-sm">
+                        04
+                    </div>
+                    <div class="space-y-2">
+                        <h4 class="text-sm font-bold text-white font-mono">Monitoring & Logs</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">
+                            Integrating telemetry collectors (Wazuh, Splunk) and dashboards to establish immediate
+                            response capabilities and log reviews.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION D: RECENT OPERATION LOGS (PROJECT_OP) -->
+        <section id="projects" class="space-y-8 scroll-mt-20">
+            <div
+                class="flex flex-col lg:flex-row lg:items-center justify-between gap-2 text-center lg:text-left lg:border-l-4 border-cyber-purple lg:pl-4">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-wide font-mono uppercase">
+                        PROJECT_REPOSITORY</h2>
+                    <p class="text-xs text-slate-500 mt-1 uppercase">A history of recent cybersecurity testing and
+                        automation projects</p>
+                </div>
+                <div class="flex items-center justify-center lg:justify-end gap-2 text-xs text-slate-500">
+                    <span class="uppercase tracking-wider font-mono">Swipe or Scroll</span>
+                    <i class="fa-solid fa-arrow-right animate-pulse text-cyber-purple"></i>
+                </div>
+            </div>
+
+            <!-- Projects horizontal carousel container -->
+            <div class="flex overflow-x-auto gap-6 pb-6 pt-2 snap-x snap-mandatory scroll-smooth"
+                id="projects-carousel">
+                <!-- Project Cards generated dynamically -->
+            </div>
+        </section>
+
+        <!-- SECTION E: TERMINAL INPUT LAYER (CONTACT) -->
+        <section id="contact" class="space-y-8 scroll-mt-20">
+            <div class="text-center lg:text-left lg:border-l-4 border-cyber-green lg:pl-4">
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-wide font-mono uppercase">
+                    ESTABLISH_SHELL_LINK</h2>
+                <p class="text-xs text-slate-500 mt-1 uppercase">Secure contact tunnel connection gateway</p>
+            </div>
+
+            <!-- Double-column desktop layout: Terminal + Cyberpunk Image Decryption Card -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center max-w-5xl mx-auto">
+
+                <!-- Left: Terminal Form (7 cols) -->
+                <div class="lg:col-span-7">
+                    <div
+                        class="border border-white/10 hover:border-cyber-cyan/35 rounded-xl bg-cyber-dark/85 shadow-2xl transition-all duration-300 overflow-hidden">
+                        <div class="bg-black/40 border-b border-white/5 px-4 py-3 flex items-center justify-between">
+                            <div class="flex gap-2">
+                                <span class="w-2.5 h-2.5 bg-red-500/70 rounded-full"></span>
+                                <span class="w-2.5 h-2.5 bg-yellow-500/70 rounded-full"></span>
+                                <span class="w-2.5 h-2.5 bg-green-500/70 rounded-full"></span>
+                            </div>
+                            <span class="text-[10px] text-slate-500 font-mono tracking-widest uppercase">ssh
+                                guest@rukshan.net -p 22</span>
+                            <div class="w-12"></div>
+                        </div>
+
+                        <form id="ssh-terminal-form" class="p-6 space-y-6 font-mono text-sm">
+                            <div class="space-y-1 text-cyber-cyan">
+                                <p>guest@rukshan:~# whoami</p>
+                                <p class="text-slate-400">-> Connection established. Please type message details below.
+                                </p>
+                            </div>
+
+                            <div class="space-y-2 flex flex-col">
+                                <label for="input-email" class="block text-slate-400 text-left">
+                                    guest@rukshan:~# <span class="text-cyber-purple font-bold">enter_email</span>
+                                    --input
+                                </label>
+                                <div
+                                    class="flex items-center bg-black/40 border border-white/10 focus-within:border-cyber-cyan rounded-lg p-2.5 transition-all duration-300">
+                                    <span class="text-cyber-cyan pr-2.5 font-bold">></span>
+                                    <input type="email" id="input-email" name="email" required
+                                        placeholder="name@domain.com"
+                                        class="w-full bg-transparent text-white focus:outline-none placeholder-slate-600">
+                                </div>
+                            </div>
+
+                            <div class="space-y-2 flex flex-col">
+                                <label for="input-message" class="block text-slate-400 text-left">
+                                    guest@rukshan:~# <span class="text-cyber-purple font-bold">enter_message</span>
+                                    --payload
+                                </label>
+                                <div
+                                    class="flex bg-black/40 border border-white/10 focus-within:border-cyber-cyan rounded-lg p-2.5 transition-all duration-300">
+                                    <span class="text-cyber-cyan pr-2.5 pt-0.5 font-bold">></span>
+                                    <textarea id="input-message" name="message" required rows="4"
+                                        placeholder="Enter transmission packet details..."
+                                        class="w-full bg-transparent text-white focus:outline-none placeholder-slate-600 resize-none"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="space-y-4">
+                                <button type="submit"
+                                    class="w-full py-3 bg-cyber-cyan text-cyber-black hover:bg-cyber-cyan/95 font-bold tracking-wider text-xs uppercase rounded-lg hover:shadow-neon-cyan transition-all duration-300 magnetic-target">
+                                    [TRANSMIT ENCRYPTED PAYLOAD]
+                                </button>
+
+                                <div id="terminal-post-console"
+                                    class="hidden bg-black/60 border border-white/5 rounded-lg p-4 text-xs space-y-1.5 max-h-48 overflow-y-auto">
+                                    <!-- Filled dynamically on submit -->
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Right: Cyberpunk Scan Card (5 cols) -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div
+                        class="relative w-64 h-80 sm:w-72 sm:h-90 border border-white/10 hover:border-cyber-purple/50 bg-cyber-dark rounded-xl p-2.5 shadow-xl transition-all duration-500 overflow-hidden">
+                        <div class="scan-line"></div>
+
+                        <!-- Design corner accents -->
+                        <div class="absolute top-2 left-2 w-3 h-3 border-t-2 border-l-2 border-cyber-purple/30"></div>
+                        <div class="absolute top-2 right-2 w-3 h-3 border-t-2 border-r-2 border-cyber-purple/30"></div>
+                        <div class="absolute bottom-2 left-2 w-3 h-3 border-b-2 border-l-2 border-cyber-purple/30">
+                        </div>
+                        <div class="absolute bottom-2 right-2 w-3 h-3 border-b-2 border-r-2 border-cyber-purple/30">
+                        </div>
+
+                        <!-- Image display area -->
+                        <div
+                            class="relative w-full h-full rounded-lg overflow-hidden bg-black/50 border border-white/5">
+                            <img id="cyber-avatar" src="cyberpunk_ring.jpg" alt="Creative Avatar"
+                                class="absolute inset-0 w-full h-full object-cover filter brightness-90 contrast-110">
+
+                            <!-- Scan grid overlay -->
+                            <div
+                                class="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_60%,rgba(0,0,0,0.3)_40%)] bg-[size:100%_6px] pointer-events-none opacity-30">
+                            </div>
+
+                            <div
+                                class="absolute bottom-0 inset-x-0 p-3 bg-gradient-to-t from-black/90 via-black/75 to-transparent flex flex-col gap-1 text-[10px] font-mono">
+                                <div class="flex justify-between items-center text-cyber-purple font-bold">
+                                    <span>ENCRYPTED NODE: KEY_LINK</span>
+                                    <span class="text-xs">🔑</span>
+                                </div>
+                                <div class="flex justify-between items-center text-slate-400">
+                                    <span>IDENTITY: <span class="text-cyber-purple font-bold">CYBERPUNK</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom footer channel directory link list -->
+            <div class="flex flex-col items-center gap-4 pt-6 border-t border-white/5 font-mono text-xs">
+                <span class="text-[10px] text-slate-500 uppercase tracking-widest">Connect channels:</span>
+                <div class="flex items-center gap-6 text-slate-400 text-lg">
+                    <a href="https://github.com" target="_blank" class="hover:text-cyber-cyan transition-colors"
+                        title="GitHub"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://facebook.com" target="_blank" class="hover:text-cyber-cyan transition-colors"
+                        title="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://youtube.com" target="_blank" class="hover:text-cyber-cyan transition-colors"
+                        title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="https://tiktok.com" target="_blank" class="hover:text-cyber-cyan transition-colors"
+                        title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Scripts configuration and animations -->
+    <script>
+        // --- 1. CONFIGURATION DATA ---
+        const SECURITY_SKILLS_DATA = [
+            { name: "Nmap Network Scanning", level: 90, icon: "🔍" },
+            { name: "Burp Suite Suite Auditing", level: 85, icon: "🛡️" },
+            { name: "Wireshark Packet Analysis", level: 80, icon: "🧬" },
+            { name: "Metasploit Vulnerability Audit", level: 85, icon: "💣" }
+        ];
+
+        const MARKETING_SKILLS_DATA = [
+            { name: "Social Media Marketing", level: 92, icon: "📈" },
+            { name: "Facebook & Google Ads Manager", level: 88, icon: "📢" },
+            { name: "Content Strategy & Copywriting", level: 85, icon: "✍️" },
+            { name: "SEO & Google Analytics Telemetry", level: 82, icon: "📊" }
+        ];
+
+        const PROJECTS_DATA = [
+            {
+                title: "AD_PENTEST : ACTIVE DIRECTORY",
+                tech: ["Active Directory", "Mimikatz", "GPO Audit"],
+                summary: "Lab auditing covering Kerberoasting, Golden ticket forging, Pass-the-Hash simulation, and Group Policy hardening configs.",
+                logLines: [
+                    "[>] Running Active Directory audit scanner...",
+                    "[+] Domain Controller checked: domain.local",
+                    "[!] Vulnerability found: Weak SMB signing setup",
+                    "[✓] Group Policy configurations reviewed and locked down."
+                ],
+                github: "https://github.com"
+            },
+            {
+                title: "GROWTH_CAMPAIGN : CONVERSION",
+                tech: ["FB Ads API", "Lead Funneling", "A/B Testing"],
+                summary: "Conversion optimization matrix setup. Built custom retargeting pipelines reducing lead acquisition costs by 34% with automation.",
+                logLines: [
+                    "[>] Tracking Pixel diagnostic script starting...",
+                    "[✓] Custom conversion event hooks configured successfully.",
+                    "[+] Campaign optimization loop established.",
+                    "[✓] Diagnostic status report output: 100% link tracking coverage."
+                ],
+                github: "https://github.com"
+            },
+            {
+                title: "SIEM_DEPLOYMENT : WAZEH",
+                tech: ["Wazuh EDR", "Splunk Log Engine", "IDS"],
+                summary: "SIEM dashboard aggregator deploying Wazuh endpoint agents linked to Splunk dashboard to capture network brute force attempts.",
+                logLines: [
+                    "[>] Wazuh cluster status: Active connections check...",
+                    "[✓] Splunk logging index sync: Complete",
+                    "[!] Alert priority: High (IP brute force attempts locked down)",
+                    "[✓] Auto blacklist firewall updates pushed to rules list."
+                ],
+                github: "https://github.com"
+            }
+        ];
+
+        // --- 2. BOOTSTRAP INITIALIZATION ---
+        document.addEventListener("DOMContentLoaded", () => {
+            initBinaryCanvasBackground();
+            buildSkillsLists();
+            buildProjectsCarousel();
+            initScrollAnimations();
+            initMagneticHoverEffects();
+            initMobileMenuToggle();
+            initDecryptText();
+            initNameTyping();
+        });
+
+        // --- 3. SUBTLE BINARY DIGITS BACKGROUND (OPTIMIZED) ---
+        let canvasAnimId;
+        function initBinaryCanvasBackground() {
+            const canvas = document.getElementById("binary-canvas");
+            const ctx = canvas.getContext("2d");
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resizeCanvas();
+            window.addEventListener("resize", () => {
+                resizeCanvas();
+            });
+
+            const fontSize = 14;
+            // Reduce density to avoid lagging performance
+            const columns = Math.floor(canvas.width / (fontSize * 1.5));
+            const drops = [];
+
+            for (let x = 0; x < columns; x++) {
+                drops[x] = Math.random() * -100;
+            }
+
+            let fpsInterval = 1000 / 24; // Limit to 24fps to optimize CPU utilization
+            let then = Date.now();
+
+            function draw() {
+                canvasAnimId = requestAnimationFrame(draw);
+
+                let now = Date.now();
+                let elapsed = now - then;
+
+                if (elapsed > fpsInterval) {
+                    then = now - (elapsed % fpsInterval);
+
+                    ctx.fillStyle = "rgba(5, 5, 8, 0.18)"; // Blends trail smoothly
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                    ctx.font = fontSize + "px monospace";
+
+                    for (let i = 0; i < drops.length; i++) {
+                        const text = Math.random() > 0.5 ? "1" : "0";
+
+                        // Mixed multi-color cyber palette & white-hot leading characters
+                        const rand = Math.random();
+                        if (rand > 0.94) {
+                            ctx.fillStyle = "#ffffff"; // White-hot leader code
+                        } else if (rand > 0.6) {
+                            ctx.fillStyle = "#00f3ff"; // Primary cyber cyan
+                        } else if (rand > 0.45) {
+                            ctx.fillStyle = "#bc00dd"; // Cyber purple depth stream
+                        } else if (rand > 0.35) {
+                            ctx.fillStyle = "#39ff14"; // Matrix green depth stream
+                        } else {
+                            ctx.fillStyle = "#003344"; // Lower depth background cyan code
+                        }
+
+                        ctx.fillText(text, i * fontSize * 1.5, drops[i] * fontSize);
+
+                        if (drops[i] * fontSize > canvas.height && Math.random() > 0.97) {
+                            drops[i] = 0;
+                        }
+                        drops[i]++;
+                    }
+                }
+            }
+
+            draw();
+        }
+
+        // --- 4. POPULATE SKILLS LISTS (ring-progress card design) ---
+        function buildSkillsLists() {
+            const secGrid = document.getElementById("security-skills-grid");
+            const markGrid = document.getElementById("marketing-skills-grid");
+
+            function makeCard(skill, accent, ringColor) {
+                const card = document.createElement("div");
+                card.className = "skill-hex-card";
+                card.style.setProperty('--card-accent', accent);
+                const circ = 163; // 2π × 26 (r=26)
+                const offset = circ - (circ * skill.level / 100);
+                card.innerHTML = `
+                    <div class="flex items-center gap-4">
+                        <div class="skill-ring-wrap">
+                            <svg width="64" height="64" viewBox="0 0 64 64">
+                                <circle class="skill-ring-bg" cx="32" cy="32" r="26"/>
+                                <circle class="skill-ring-fill" cx="32" cy="32" r="26"
+                                    stroke="${ringColor}"
+                                    data-offset="${offset}"
+                                    style="stroke-dashoffset:163"/>
+                            </svg>
+                            <div class="skill-ring-label" style="color:${ringColor}">${skill.level}%</div>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center gap-1.5 mb-1">
+                                <span class="text-base leading-none">${skill.icon}</span>
+                                <span class="text-xs font-bold text-white font-mono truncate">${skill.name}</span>
+                            </div>
+                            <div class="w-full bg-black/40 h-1 rounded-full overflow-hidden">
+                                <div class="h-full rounded-full transition-all duration-1000" style="width:0%;background:${ringColor}" data-width="${skill.level}%"></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                return card;
+            }
+
+            SECURITY_SKILLS_DATA.forEach(skill => secGrid.appendChild(makeCard(skill, '#00f3ff', '#00f3ff')));
+            MARKETING_SKILLS_DATA.forEach(skill => markGrid.appendChild(makeCard(skill, '#b026ff', '#b026ff')));
+
+            // Trigger ring + bar animations on scroll
+            const allCards = document.querySelectorAll('.skill-hex-card');
+            const skillObs = new IntersectionObserver((entries) => {
+                entries.forEach((entry, i) => {
+                    if (entry.isIntersecting) {
+                        const card = entry.target;
+                        const delay = Array.from(allCards).indexOf(card) * 80;
+                        setTimeout(() => {
+                            card.classList.add('visible');
+                            const ring = card.querySelector('.skill-ring-fill');
+                            const bar = card.querySelector('[data-width]');
+                            if (ring) ring.style.strokeDashoffset = ring.dataset.offset;
+                            if (bar) bar.style.width = bar.dataset.width;
+                        }, delay);
+                        skillObs.unobserve(card);
+                    }
+                });
+            }, { threshold: 0.15 });
+            allCards.forEach(c => skillObs.observe(c));
+        }
+
+        // --- 5. POPULATE PROJECTS CAROUSEL ---
+        function buildProjectsCarousel() {
+            const carousel = document.getElementById("projects-carousel");
+            PROJECTS_DATA.forEach(project => {
+                const card = document.createElement("div");
+                card.className = "min-w-[290px] sm:min-w-[370px] snap-start bg-cyber-dark/95 border border-white/5 hover:border-cyber-purple/50 rounded-xl overflow-hidden flex flex-col justify-between transition-all duration-300 relative group p-1";
+
+                const tagsHTML = project.tech.map(t => `<span class="bg-black/40 border border-white/5 text-slate-400 text-[9px] px-2 py-0.5 rounded font-mono">${t}</span>`).join('');
+                const logsHTML = project.logLines.map(line => `<div class="text-slate-400 font-mono tracking-tight">${line}</div>`).join('');
+
+                card.innerHTML = `
+                    <div class="p-4 space-y-4">
+                        <div class="flex items-center justify-between border-b border-white/5 pb-2">
+                            <div class="flex gap-1">
+                                <span class="w-2 h-2 bg-red-500/40 rounded-full"></span>
+                                <span class="w-2 h-2 bg-yellow-500/40 rounded-full"></span>
+                                <span class="w-2 h-2 bg-green-500/40 rounded-full"></span>
+                            </div>
+                            <span class="text-[9px] text-cyber-purple font-mono font-bold tracking-wider">${project.title}</span>
+                        </div>
+
+                        <div class="space-y-2">
+                            <div class="flex flex-wrap gap-1.5">
+                                ${tagsHTML}
+                            </div>
+                            <p class="text-xs text-slate-400 leading-relaxed min-h-[50px]">${project.summary}</p>
+                        </div>
+
+                        <div class="bg-black/60 border border-white/5 rounded-lg p-3 text-[9px] font-mono leading-normal h-24 overflow-y-auto space-y-1 scrollbar-none">
+                            ${logsHTML}
+                        </div>
+                    </div>
+
+                    <div class="bg-black/30 border-t border-white/5 px-4 py-3 flex items-center justify-between text-xs">
+                        <span class="text-[9px] text-slate-500 font-mono uppercase tracking-widest">REMOTE: GITHUB</span>
+                        <a href="${project.github}" target="_blank" class="text-cyber-purple hover:text-white flex items-center gap-1 group-hover:translate-x-1 transition-transform font-mono text-[10px]">
+                            <span>inspect_code.sh</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                `;
+                carousel.appendChild(card);
+            });
+        }
+
+        // --- 6. NAME TYPING EFFECT ---
+        function initNameTyping() {
+            const nameEl = document.getElementById("hero-name-type");
+            if (!nameEl) return;
+            const words = ["RUKSHAN", "RuSH_X", "RUKSHAN_OP"];
+            let wordIdx = 0, charIdx = words[0].length, deleting = false;
+
+            function tick() {
+                const currentWord = words[wordIdx];
+                nameEl.textContent = deleting
+                    ? currentWord.slice(0, charIdx - 1)
+                    : currentWord.slice(0, charIdx + 1);
+                charIdx = deleting ? charIdx - 1 : charIdx + 1;
+
+                if (!deleting && charIdx === currentWord.length) {
+                    deleting = true;
+                    setTimeout(tick, 2200); // Wait on complete word
+                    return;
+                }
+                if (deleting && charIdx === 0) {
+                    deleting = false;
+                    wordIdx = (wordIdx + 1) % words.length;
+                    setTimeout(tick, 400); // Wait before starting next word
+                    return;
+                }
+                setTimeout(tick, deleting ? 60 : 120);
+            }
+            setTimeout(tick, 1000);
+        }
+
+        // --- 7. ABOUT SECTION & STATS REVEAL (GSAP ScrollTrigger) ---
+        function initAboutAndStats() {
+            // 1. Animate entire about section in (simple fade+slide up)
+            gsap.fromTo('#about',
+                { opacity: 0, y: 30 },
+                {
+                    opacity: 1, y: 0, duration: 0.7, ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: '#about', start: 'top 88%', once: true
+                    }
+                }
+            );
+
+            // 2. Bio card slide-in after section is visible
+            const isMobile = window.innerWidth < 768;
+            gsap.fromTo('.about-reveal',
+                { opacity: 0, x: isMobile ? 0 : -30, y: isMobile ? 20 : 0 },
+                {
+                    opacity: 1, x: 0, y: 0, duration: 0.8, ease: 'power3.out', delay: 0.2,
+                    scrollTrigger: { trigger: '#about', start: 'top 85%', once: true }
+                }
+            );
+
+            // 3. Stat cards pop up
+            gsap.fromTo('.stat-card',
+                { opacity: 0, y: 20, scale: 0.95 },
+                {
+                    opacity: 1, y: 0, scale: 1, duration: 0.5, stagger: 0.1, ease: 'back.out(1.4)',
+                    delay: 0.3,
+                    scrollTrigger: { trigger: '#about', start: 'top 85%', once: true }
+                }
+            );
+        }
+
+        // --- OLD TYPING/STAT PLACEHOLDER ---
+
+        // --- 7. MOBILE MENU TOWARDS RESPONSIVENESS ---
+        function initMobileMenuToggle() {
+            const toggle = document.getElementById("mobile-toggle");
+            const close = document.getElementById("mobile-close");
+            const menu = document.getElementById("mobile-menu");
+            const links = document.querySelectorAll(".mobile-nav-link");
+
+            if (!toggle || !menu) return;
+
+            function openMenu() {
+                menu.classList.remove("translate-x-full", "invisible", "pointer-events-none");
+                const header = document.getElementById("main-header");
+                if (header) header.classList.add("invisible", "pointer-events-none");
+            }
+
+            function closeMenu() {
+                menu.classList.add("translate-x-full", "invisible", "pointer-events-none");
+                const header = document.getElementById("main-header");
+                if (header) header.classList.remove("invisible", "pointer-events-none");
+            }
+
+            toggle.addEventListener("click", openMenu);
+            if (close) close.addEventListener("click", closeMenu);
+            links.forEach(link => {
+                link.addEventListener("click", closeMenu);
+            });
+        }
+
+        // --- 8. GSAP SCROLL ANIMS ---
+        function initScrollAnimations() {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Centered Floating Header Entry Animation
+            gsap.set("#main-header", { y: -50, opacity: 0 });
+            gsap.to("#main-header", {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                ease: "power4.out",
+                delay: 0.2
+            });
+
+            // Hero Text Staggered Entry Animation
+            const heroTL = gsap.timeline({ delay: 0.4 });
+            heroTL.fromTo("#init .inline-flex", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.7)" })
+                .fromTo("#init h1", { opacity: 0, y: 25 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.35")
+                .fromTo("#init .space-y-3 div", { opacity: 0 }, { opacity: 1, duration: 0.3 }, "-=0.2")
+                .fromTo("#init p", { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.3")
+                .fromTo("#init .space-y-3", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5 }, "-=0.3")
+                .fromTo("#init .flex-wrap", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5 }, "-=0.3");
+
+            // Hero Portrait Entry Animation
+            gsap.fromTo("#init .lg:col-span-5",
+                { opacity: 0, scale: 0.95, rotateY: 15 },
+                { opacity: 1, scale: 1, rotateY: 0, duration: 1.2, ease: "power4.out", delay: 0.6 }
+            );
+
+            // Alternating side section scroll animation (skip #about — handled separately)
+            const sections = document.querySelectorAll("section:not(#init):not(#about)");
+            sections.forEach((sec, idx) => {
+                const isMobile = window.innerWidth < 768;
+                const directionX = isMobile ? 0 : (idx % 2 === 0 ? -40 : 40);
+                gsap.fromTo(sec,
+                    { opacity: 0, x: directionX, y: 20 },
+                    {
+                        opacity: 1,
+                        x: 0,
+                        y: 0,
+                        duration: 0.8,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: sec,
+                            start: "top 85%",
+                            toggleActions: "play none none none"
+                        }
+                    }
+                );
+            });
+
+            // Stagger reveal tool grid cards on scroll
+            gsap.fromTo("#tools-env .grid > div",
+                { opacity: 0, y: 20, scale: 0.95 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    duration: 0.5,
+                    stagger: 0.05,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: "#tools-env",
+                        start: "top 80%"
+                    }
+                }
+            );
+
+            // Stagger reveal service cards on scroll
+            gsap.fromTo("#services .grid > div",
+                { opacity: 0, y: 20, scale: 0.95 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    duration: 0.6,
+                    stagger: 0.1,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: "#services",
+                        start: "top 80%"
+                    }
+                }
+            );
+
+            // Smooth scrolling active link highlight observer
+            const observerOptions = {
+                root: null,
+                rootMargin: '-30% 0px -50% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const targetId = entry.target.id;
+                        document.querySelectorAll(".nav-link").forEach(link => {
+                            if (link.dataset.target === targetId) {
+                                link.classList.add("active-nav-item");
+                            } else {
+                                link.classList.remove("active-nav-item");
+                            }
+                        });
+                        document.querySelectorAll(".mobile-nav-link").forEach(link => {
+                            if (link.dataset.target === targetId) {
+                                link.classList.add("active-nav-item-mobile");
+                            } else {
+                                link.classList.remove("active-nav-item-mobile");
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll("section").forEach(sec => observer.observe(sec));
+
+            // About section reveal + stat counters (delayed so section animation finishes first)
+            setTimeout(() => initAboutAndStats(), 500);
+        }
+
+        // --- 9. MAGNETIC INTERACTION ---
+        function initMagneticHoverEffects() {
+            const targets = document.querySelectorAll(".magnetic-target");
+            targets.forEach(target => {
+                target.addEventListener("mousemove", (e) => {
+                    const rect = target.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+
+                    gsap.to(target, {
+                        x: x * 0.25,
+                        y: y * 0.25,
+                        duration: 0.3,
+                        ease: "power2.out"
+                    });
+                });
+
+                target.addEventListener("mouseleave", () => {
+                    gsap.to(target, {
+                        x: 0,
+                        y: 0,
+                        duration: 0.4,
+                        ease: "elastic.out(1, 0.4)"
+                    });
+                });
+            });
+        }
+
+        // --- 10. SSH TRANSMISSION TERMINAL SUBMISSION ---
+        const contactForm = document.getElementById("ssh-terminal-form");
+        const postConsole = document.getElementById("terminal-post-console");
+
+        contactForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const email = document.getElementById("input-email").value;
+
+            postConsole.classList.remove("hidden");
+            postConsole.innerHTML = "";
+
+            const logs = [
+                `[>] Resolving DNS keys target to ssh://guest@rukshan.net...`,
+                `[✓] Pipeline Tunnel secure link connected.`,
+                `[>] Encrypting metadata payload packet (from: ${email})...`,
+                `[!] Transmitting packets blocks to server node list...`,
+                `[✓] Server response: 200 SUCCESS - Message stored in host buffer.`,
+                `[✓] Tunnel connection disconnected safely.`
+            ];
+
+            let index = 0;
+            function printConsoleLogs() {
+                if (index < logs.length) {
+                    const l = document.createElement("div");
+                    l.innerText = logs[index];
+
+                    if (logs[index].includes("[✓]")) l.className = "text-cyber-green";
+                    if (logs[index].includes("[!]")) l.className = "text-cyber-purple";
+
+                    postConsole.appendChild(l);
+                    postConsole.scrollTop = postConsole.scrollHeight;
+                    index++;
+                    setTimeout(printConsoleLogs, 450);
+                } else {
+                    contactForm.reset();
+                }
+            }
+
+            printConsoleLogs();
+        });
+
+        // --- 11. SMOOTH SCROLL INIT (FIXED CONFICITING JITTER LAG) ---
+        // CRITICAL FIX: Removed html.scroll-smooth class from head stylesheet.
+        // If html has scroll-smooth in CSS and Lenis is active, the browser and Lenis fight over the scroll position, causing terrible stutter/jitter ("hirawenawa").
+        const lenis = new Lenis({
+            duration: 1.1,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smoothWheel: true
+        });
+
+        // Intercept hash anchors and let Lenis animate them smoothly with ease-out
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const target = document.querySelector(targetId);
+                if (target) {
+                    lenis.scrollTo(target, {
+                        offset: -90, // Adjusted offset for floating top navbar (top-4 spacing)
+                        duration: 1.2,
+                        immediate: false
+                    });
+                }
+            });
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+
+        requestAnimationFrame(raf);
+
+        // --- 12. MATRIX DECRYPTION TEXT EFFECT ---
+        function initDecryptText() {
+            const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*!?<>/[]=+~^";
+
+            function runDecrypt(textNodes, delayMs) {
+                textNodes.forEach((node, ni) => {
+                    const orig = node.originalTextValue;
+                    if (!orig || orig.trim() === "") return;
+                    const length = orig.length;
+                    let progress = 0;
+                    let iterations = 0;
+                    const totalIter = Math.ceil(length / 3);
+
+                    setTimeout(() => {
+                        const interval = setInterval(() => {
+                            let currentText = "";
+                            for (let i = 0; i < length; i++) {
+                                if (orig[i] === " " || orig[i] === "\n" || orig[i] === "\t") {
+                                    currentText += orig[i];
+                                } else if (i < progress) {
+                                    currentText += orig[i]; // Resolved chars
+                                } else {
+                                    // Scramble remaining chars
+                                    currentText += CHARS[Math.floor(Math.random() * CHARS.length)];
+                                }
+                            }
+                            node.textContent = currentText;
+                            progress += Math.max(1, Math.ceil(length / 28));
+                            iterations++;
+
+                            if (progress >= length) {
+                                node.textContent = orig;
+                                clearInterval(interval);
+                            }
+                        }, 18);
+                    }, delayMs + ni * 80); // stagger each text node
+                });
+            }
+
+            const decryptElements = document.querySelectorAll(".decrypt-text");
+
+            decryptElements.forEach(el => {
+                const textNodes = [];
+                function findTextNodes(node) {
+                    if (node.nodeType === Node.TEXT_NODE) {
+                        textNodes.push(node);
+                    } else {
+                        for (let child of node.childNodes) {
+                            findTextNodes(child);
+                        }
+                    }
+                }
+                findTextNodes(el);
+
+                textNodes.forEach(node => {
+                    node.originalTextValue = node.textContent;
+                });
+
+                // Hero text: fire immediately on load
+                if (el.id === "hero-decrypt-text") {
+                    setTimeout(() => runDecrypt(textNodes, 0), 900);
+                    return;
+                }
+
+                // All others: trigger on scroll entry
+                ScrollTrigger.create({
+                    trigger: el,
+                    start: "top 88%",
+                    once: true,
+                    onEnter: () => runDecrypt(textNodes, 0)
+                });
+            });
+        }
+
+        // --- 13. TOOLS SPIDER WEB NETWORK CANVAS (ADVANCED - SVG LOGOS + TOUCH) ---
+        function initToolsWebCanvas() {
+            const canvas = document.getElementById("tools-web-canvas");
+            if (!canvas) return;
+            const ctx = canvas.getContext("2d");
+            const tooltip = document.getElementById("tool-tooltip");
+            const ttName = document.getElementById("tooltip-name");
+            const ttDesc = document.getElementById("tooltip-desc");
+
+            const ICON_BASE = "https://cdn.jsdelivr.net/npm/simple-icons@11.12.0/icons/";
+            const tools = [
+                { name: "Nmap", desc: "Network Recon & Port Scanning", color: "#00f3ff", svg: "nmap" },
+                { name: "Wireshark", desc: "Packet Inspection & Traffic Capture", color: "#1679A7", svg: "wireshark" },
+                { name: "Burp Suite", desc: "Web App Security Interception", color: "#FF6633", svg: "burpsuite" },
+                { name: "Metasploit", desc: "Exploitation Framework & Labbing", color: "#6C63FF", svg: "metasploit" },
+                { name: "Hashcat", desc: "Hash Decryption & Rule Audits", color: "#cccccc", svg: "hashcat" },
+                { name: "Splunk", desc: "SIEM Log Telemetry & EDR Alerts", color: "#F79F1F", svg: "splunk" },
+                { name: "Nessus", desc: "Vulnerability Scanning & Reports", color: "#00C221", svg: "nessus" },
+                { name: "Kali Linux", desc: "Offensive Operating System", color: "#8F9CA4", svg: "kalilinux" },
+                { name: "Shodan", desc: "IoT Scanner Recon & Intelligence", color: "#E12026", svg: "shodan" },
+                { name: "Python", desc: "Automation Scripts & Pipelines", color: "#3776AB", svg: "python" },
+            ];
+
+            // Load + tint SVG images
+            const iconImgs = {};
+            tools.forEach(t => {
+                fetch(ICON_BASE + t.svg + ".svg")
+                    .then(r => r.text())
+                    .then(svgText => {
+                        // Inject fill color into SVG
+                        const colored = svgText.replace(/(<svg[^>]*)>/, `$1 fill="${t.color}">`);
+                        const blob = new Blob([colored], { type: "image/svg+xml" });
+                        const url = URL.createObjectURL(blob);
+                        const img = new Image();
+                        img.onload = () => { iconImgs[t.name] = img; };
+                        img.src = url;
+                    }).catch(() => { });
+            });
+
+            // Animated data packets along connections
+            const packets = [];
+            function spawnPacket(from, to, color) {
+                packets.push({ from, to, progress: 0, speed: 0.008 + Math.random() * 0.006, color, size: 2.5 });
+            }
+
+            let W, H, cx, cy, nodes = [], initialized = false;
+            let pointer = { x: -9999, y: -9999 };
+            let lastPacketTime = 0;
+
+            function resize() {
+                const rect = canvas.parentElement.getBoundingClientRect();
+                W = canvas.width = Math.round(rect.width);
+                H = canvas.height = Math.round(rect.height);
+                cx = W / 2; cy = H / 2;
+                buildNodes();
+            }
+
+            function buildNodes() {
+                const isMobile = W < 600;
+                const orbitR = Math.min(W, H) * (isMobile ? 0.38 : 0.34);
+                nodes = tools.map((t, i) => {
+                    const angle = (i / tools.length) * Math.PI * 2 - Math.PI / 2;
+                    return {
+                        ...t,
+                        x: cx + Math.cos(angle) * orbitR,
+                        y: cy + Math.sin(angle) * orbitR,
+                        orbitR,
+                        orbitAngle: angle,
+                        orbitSpeed: (0.00025 + Math.random() * 0.00015) * (i % 2 === 0 ? 1 : -1),
+                        driftOffset: Math.random() * Math.PI * 2,
+                        driftAmp: isMobile ? 3 : 5,
+                        radius: isMobile ? 22 : 28,
+                        pulse: Math.random() * Math.PI * 2,
+                        hover: false,
+                    };
+                });
+            }
+
+            function h2r(hex) {
+                return [parseInt(hex.slice(1, 3), 16), parseInt(hex.slice(3, 5), 16), parseInt(hex.slice(5, 7), 16)];
+            }
+
+            function drawWeb(ts) {
+                ctx.clearRect(0, 0, W, H);
+
+                // ---- CENTRAL NEXUS ----
+                const cp = 0.6 + 0.4 * Math.sin(ts * 0.0018);
+                // Outer rotating scan ring
+                ctx.save();
+                ctx.translate(cx, cy);
+                ctx.rotate(ts * 0.0008);
+                ctx.beginPath();
+                ctx.arc(0, 0, 52, 0, Math.PI * 1.5);
+                ctx.strokeStyle = `rgba(0,243,255,${0.3 * cp})`;
+                ctx.lineWidth = 1.2;
+                ctx.setLineDash([8, 6]);
+                ctx.stroke();
+                ctx.setLineDash([]);
+                ctx.restore();
+
+                // Inner rings
+                [38, 24].forEach((r, ri) => {
+                    ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2);
+                    ctx.strokeStyle = `rgba(0,243,255,${(0.5 - ri * 0.15) * cp})`;
+                    ctx.lineWidth = 1; ctx.stroke();
+                });
+
+                // Core glow
+                const cg = ctx.createRadialGradient(cx, cy, 0, cx, cy, 40);
+                cg.addColorStop(0, `rgba(0,243,255,${0.4 * cp})`);
+                cg.addColorStop(0.5, `rgba(0,243,255,0.08)`);
+                cg.addColorStop(1, "transparent");
+                ctx.beginPath(); ctx.arc(cx, cy, 40, 0, Math.PI * 2);
+                ctx.fillStyle = cg; ctx.fill();
+
+                // Core fill + text
+                ctx.beginPath(); ctx.arc(cx, cy, 14, 0, Math.PI * 2);
+                ctx.fillStyle = "#00f3ff"; ctx.fill();
+                ctx.font = "bold 5.5px monospace"; ctx.fillStyle = "#050508";
+                ctx.textAlign = "center"; ctx.textBaseline = "middle";
+                ctx.fillText("NEXUS", cx, cy);
+
+                // Faint orbit trace ring
+                if (nodes.length) {
+                    ctx.beginPath(); ctx.arc(cx, cy, nodes[0].orbitR, 0, Math.PI * 2);
+                    ctx.strokeStyle = "rgba(0,243,255,0.04)"; ctx.lineWidth = 0.8;
+                    ctx.setLineDash([3, 9]); ctx.stroke(); ctx.setLineDash([]);
+                }
+
+                // ---- CONNECTIONS FIRST (behind nodes) ----
+                nodes.forEach((n, i) => {
+                    const next = nodes[(i + 1) % nodes.length];
+                    const skip2 = nodes[(i + 2) % nodes.length];
+                    const [r, g, b] = h2r(n.color);
+
+                    // Center spokes
+                    ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(n.x, n.y);
+                    const lineAlpha = n.hover ? 0.75 : 0.22 + 0.1 * Math.sin(n.pulse);
+                    ctx.strokeStyle = `rgba(${r},${g},${b},${lineAlpha})`;
+                    ctx.lineWidth = n.hover ? 1.6 : 0.85; ctx.stroke();
+
+                    // Ring connections (neighbours)
+                    ctx.beginPath(); ctx.moveTo(n.x, n.y); ctx.lineTo(next.x, next.y);
+                    ctx.strokeStyle = "rgba(0,243,255,0.09)"; ctx.lineWidth = 0.6; ctx.stroke();
+
+                    // Skip-2 connections (inner web diagonals)
+                    ctx.beginPath(); ctx.moveTo(n.x, n.y); ctx.lineTo(skip2.x, skip2.y);
+                    ctx.strokeStyle = "rgba(188,0,221,0.055)"; ctx.lineWidth = 0.5; ctx.stroke();
+                });
+
+                // ---- ANIMATED DATA PACKETS ----
+                // Spawn new packet occasionally
+                if (ts - lastPacketTime > 500 && nodes.length > 1) {
+                    lastPacketTime = ts;
+                    const from = nodes[Math.floor(Math.random() * nodes.length)];
+                    const targets = [nodes[(nodes.indexOf(from) + 1) % nodes.length], { x: cx, y: cy }];
+                    const to = targets[Math.floor(Math.random() * targets.length)];
+                    spawnPacket(from, to, from.color);
+                }
+
+                // Draw + advance packets
+                for (let i = packets.length - 1; i >= 0; i--) {
+                    const p = packets[i];
+                    p.progress += p.speed;
+                    if (p.progress >= 1) { packets.splice(i, 1); continue; }
+                    const px = p.from.x + (p.to.x - p.from.x) * p.progress;
+                    const py = p.from.y + (p.to.y - p.from.y) * p.progress;
+                    const [pr, pg, pb] = h2r(p.color);
+                    const alpha = Math.sin(p.progress * Math.PI);
+                    ctx.beginPath(); ctx.arc(px, py, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(${pr},${pg},${pb},${alpha * 0.9})`;
+                    ctx.shadowBlur = 8; ctx.shadowColor = p.color;
+                    ctx.fill(); ctx.shadowBlur = 0;
+                }
+
+                // ---- NODES ----
+                nodes.forEach((n, i) => {
+                    n.orbitAngle += n.orbitSpeed;
+                    n.x = cx + Math.cos(n.orbitAngle) * n.orbitR + Math.sin(ts * 0.0008 + n.driftOffset) * n.driftAmp;
+                    n.y = cy + Math.sin(n.orbitAngle) * n.orbitR + Math.cos(ts * 0.001 + n.driftOffset) * n.driftAmp * 0.7;
+                    n.pulse += 0.022;
+                    const d = Math.hypot(pointer.x - n.x, pointer.y - n.y);
+                    n.hover = d < n.radius + 12;
+
+                    const [r, g, b] = h2r(n.color);
+                    const pulseMul = 0.45 + 0.35 * Math.sin(n.pulse);
+                    const R = n.hover ? n.radius + 8 : n.radius;
+
+                    // Outer glow halo
+                    const gGrad = ctx.createRadialGradient(n.x, n.y, R * 0.3, n.x, n.y, R + 22);
+                    gGrad.addColorStop(0, `rgba(${r},${g},${b},${pulseMul * (n.hover ? 0.6 : 0.28)})`);
+                    gGrad.addColorStop(1, "transparent");
+                    ctx.beginPath(); ctx.arc(n.x, n.y, R + 22, 0, Math.PI * 2);
+                    ctx.fillStyle = gGrad; ctx.fill();
+
+                    // Node background circle
+                    ctx.beginPath(); ctx.arc(n.x, n.y, R, 0, Math.PI * 2);
+                    ctx.fillStyle = n.hover ? `rgba(${r},${g},${b},0.28)` : `rgba(${r},${g},${b},0.12)`;
+                    ctx.fill();
+                    ctx.strokeStyle = n.hover ? `rgba(${r},${g},${b},1)` : `rgba(${r},${g},${b},0.7)`;
+                    ctx.lineWidth = n.hover ? 2.2 : 1.4; ctx.stroke();
+
+                    // Draw SVG logo if loaded, else text fallback
+                    const img = iconImgs[n.name];
+                    const iconSize = R * 1.0;
+                    if (img && img.complete && img.naturalWidth > 0) {
+                        ctx.drawImage(img, n.x - iconSize / 2, n.y - iconSize / 2 - 5, iconSize, iconSize);
+                        // Name below icon inside node
+                        ctx.font = `bold ${n.hover ? 8 : 7}px monospace`;
+                        ctx.fillStyle = n.hover ? n.color : `rgba(${r},${g},${b},0.9)`;
+                        ctx.textAlign = "center"; ctx.textBaseline = "middle";
+                        const short = n.name.length > 7 ? n.name.slice(0, 7) : n.name;
+                        ctx.fillText(short, n.x, n.y + iconSize / 2 - 1);
+                    } else {
+                        // Text fallback
+                        ctx.font = `bold ${n.hover ? 9 : 8}px monospace`;
+                        ctx.fillStyle = n.hover ? n.color : `rgba(${r},${g},${b},0.9)`;
+                        ctx.textAlign = "center"; ctx.textBaseline = "middle";
+                        ctx.fillText(n.name.length > 7 ? n.name.slice(0, 7) : n.name, n.x, n.y);
+                    }
+                });
+
+                // ---- TOOLTIP ----
+                const hovered = nodes.find(n => n.hover);
+                if (hovered && tooltip) {
+                    ttName.textContent = hovered.name;
+                    ttDesc.textContent = hovered.desc;
+                    tooltip.style.left = hovered.x + "px";
+                    tooltip.style.top = (hovered.y - hovered.radius - 14) + "px";
+                    tooltip.classList.remove("hidden");
+                } else if (tooltip) {
+                    tooltip.classList.add("hidden");
+                }
+
+                requestAnimationFrame(drawWeb);
+            }
+
+            // ---- UNIFIED POINTER (MOUSE + TOUCH) ----
+            function updatePointer(e) {
+                const rect = canvas.getBoundingClientRect();
+                const src = e.touches ? e.touches[0] : e;
+                pointer.x = (src.clientX - rect.left) * (W / rect.width);
+                pointer.y = (src.clientY - rect.top) * (H / rect.height);
+            }
+            canvas.addEventListener("mousemove", updatePointer);
+            canvas.addEventListener("touchmove", e => { e.preventDefault(); updatePointer(e); }, { passive: false });
+            canvas.addEventListener("mouseleave", () => { pointer.x = -9999; pointer.y = -9999; });
+            canvas.addEventListener("touchend", () => { pointer.x = -9999; pointer.y = -9999; });
+
+            function start() {
+                if (!initialized) {
+                    initialized = true;
+                    resize();
+                    window.addEventListener("resize", () => { resize(); });
+                    requestAnimationFrame(drawWeb);
+                }
+            }
+
+            ScrollTrigger.create({ trigger: "#tools-env", start: "top 85%", onEnter: start });
+            setTimeout(() => { resize(); start(); }, 200);
+        }
+
+        // Also call initToolsWebCanvas in DOMContentLoaded
+        document.addEventListener("DOMContentLoaded", () => {
+            initToolsWebCanvas();
+        });
+    </script>
+</body>
+
+</html>
